@@ -22,6 +22,7 @@
   <div class="right menu">
     @guest
       <a href="{{ route('register') }}" class="item"> Registro </a>
+      <a href="{{ route('login') }}" class="item"> Iniciar Sesion </a>
     @else
     <div class="ui right dropdown item"> {{ Auth::user()->name }} <i class="dropdown icon"></i> <div class="menu">
          
@@ -37,7 +38,7 @@
       </div>
     </div>
     @endguest
-      <a href="{{ route('login') }}" class="item"> Iniciar Sesion </a>
+    
 
   </div>
   

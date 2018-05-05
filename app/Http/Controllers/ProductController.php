@@ -14,7 +14,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        // Creamos una variable donde vamos a pasar todos los registros de los productos, para mostrarlos en la vista
+        $products = Product::paginate(5);
+
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -25,6 +28,7 @@ class ProductController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
