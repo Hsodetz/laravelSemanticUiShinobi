@@ -29,4 +29,10 @@
 <script src="{{ asset('js/semantic.js') }}"></script>
 <script src="http://cdn.jsdelivr.net/jquery.glide/1.0.6/jquery.glide.min.js"></script>
 
+<script>
+  $('.ui.dropdown')
+    .dropdown()
+  ;
+</script>
+
 </html>
