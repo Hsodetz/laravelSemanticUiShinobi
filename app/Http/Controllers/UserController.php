@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
+use Caffeinated\Shinobi\Models\Role; //Hacemos uso para usar Role::
+
 class UserController extends Controller
 {
     /**
@@ -14,6 +18,9 @@ class UserController extends Controller
     public function index()
     {
         //
+        $users = User::paginate();
+
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -43,9 +50,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         //
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -54,9 +62,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        //obtenemos todos los roles, para poder asignarlos luego en la edicion y actualizacion de usuario
+        $roles = Role::get();
+
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -66,9 +77,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        //Primero que se actualice el usuario
+        $user->update($request->all());
+
+        //Luego que se actualicen los roles, sincronizamos los datos que pasamos con el campo roles
+        $user->roles()->sync($request->get('roles'));
+
+        return redirect()->route('users.edit', $user->id)->with('info', "Usuario actualizado con exito!");
     }
 
     /**
@@ -77,8 +94,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
+      
+        $user->delete();
+
+        return back()->with('info', "El usuario $user->name se ha eliminado!");
     }
 }

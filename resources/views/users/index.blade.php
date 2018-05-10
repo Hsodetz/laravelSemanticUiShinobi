@@ -5,10 +5,6 @@
 <div class="ui segments">
     <div class="ui segment">
         Productos
-        @can('products.create')
-          <a href="{{ route('products.create') }}" class="mini ui negative basic right floated button"> Crear </a>
-        @endcan
-
     </div>
     <div class="ui secondary segment">
 
@@ -22,24 +18,24 @@
         </thead>
         <tbody>
           
-          @foreach ($products as $product)
+          @foreach ($users as $user)
             <tr>
-              <td> {{ $product->id }} </td>
-              <td> {{ $product->name }} </td>
-              <td>
-                @can('products.show') 
-                  <a class="mini ui primary basic button" href="{{ route('products.show', $product->id) }}"> Ver </a>
+              <td> {{ $user->id }} </td>
+              <td> {{ $user->name }} </td>
+              <td width="10px">
+                @can('users.show') 
+                  <a class="mini ui primary basic button" href="{{ route('users.show', $user->id) }}"> Ver </a>
                 @endcan
               </td>
-              <td>
-                @can('products.edit') 
-                  <a class="mini ui orange basic button" href="{{ route('products.edit', $product->id) }}"> Editar </a>
+              <td width="10px">
+                @can('users.edit') 
+                  <a class="mini ui orange basic button" href="{{ route('users.edit', $user->id) }}"> Editar </a>
                 @endcan
               </td>
-              <td>
-                @can('products.destroy') 
+              <td width="10px">
+                @can('users.destroy') 
                  
-                  {!! Form::open(['route' => ['products.destroy', $product->id], 'method' => 'DELETE']) !!}
+                  {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'DELETE']) !!}
                     <button class="mini ui negative basic button"> Eliminar </button>
                   {!! Form::close() !!}
                   
@@ -52,7 +48,7 @@
       </table>
       <div class="ui pagination menu">
         <a href="" class="item"> 
-          {!! $products->links() !!}
+          {!! $users->links() !!}
         </a>
       </div>
        

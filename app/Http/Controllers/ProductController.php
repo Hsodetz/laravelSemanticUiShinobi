@@ -27,8 +27,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
-        
+        // Retornamos la vista para que se vaya a la pagina de creacion de formulario
+        return view('products.create');
+
     }
 
     /**
@@ -39,7 +40,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Aqui recibimos los datos del formulario, lo almacenamos y nos redirijimos a una vista
+        $product = Product::create($request->all());
+
+        return redirect()->route('products.index')->with('info', "Producto guardado con exito");
     }
 
     /**
@@ -50,7 +54,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        //dd($product->id);
+        //Aqui mostramos a la vista show y le pasamos la variable product para mostrarla en la vista
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -61,7 +67,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        //Aqui mostramos a la vista que contiene el formulario de edicion, y le pasamos el $product
+        //para saber el id del mismo
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -74,6 +82,9 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        $product->update($request->all());
+
+        return redirect()->route('products.edit', $product->id)->with('info', "Producto $product->name actualizado correctamente");
     }
 
     /**
@@ -85,5 +96,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+        $product->delete();
+
+        return back()->with('info', "Producto $product->name eliminado correctamente");
     }
 }

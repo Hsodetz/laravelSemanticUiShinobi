@@ -7,6 +7,8 @@
   <title> @yield('title') | Helmuth </title>
 
   {!! Html::style('css/semantic.css') !!}
+
+  
   
   {!! Html::style('css/miestilo.css') !!}
 
@@ -17,9 +19,15 @@
 <body>
   
   @include('includes.navbar')
+
+  
   
   <div class="ui container">
+    
+    @include('includes.info')
+    
     @yield('contenido')
+  
   </div>
   
 
@@ -32,6 +40,15 @@
 <script>
   $('.ui.dropdown')
     .dropdown()
+  ;
+  // Script para cerrar los mensajes
+  $('.message .close')
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade')
+    ;
+  })
   ;
 </script>
 

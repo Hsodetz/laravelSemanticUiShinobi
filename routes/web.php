@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('roles/{role}', 'RoleController@show')->name('roles.show')
                 ->middleware('permission:roles.show');        
         //Ruta para almacenar los datos luego de ser introducidos en el formulario
-        Route::post('roles/create', 'RoleController@store')->name('roles.store')
+        Route::post('roles/store', 'RoleController@store')->name('roles.store')
                 ->middleware('permission:roles.create'); 
         //Ruta para mostrar el formulario de creacion de registro de roles
         Route::get('roles/create', 'RoleController@create')->name('roles.create')
@@ -49,39 +49,43 @@ Route::middleware(['auth'])->group(function(){
                 
         //Ruta para los Productos      
         // Ruta para listar todos los productos
+         
         Route::get('products', 'ProductController@index')->name('products.index')
-        ->middleware('permission:products.index');
+                ->middleware('permission:products.index');
         //Ruta para ver los detalles de un producto
-        Route::get('products/{role}', 'ProductController@show')->name('products.show')
-        ->middleware('permission:products.show');        
+        Route::get('products/{product}', 'ProductController@show')->name('products.show')
+                ->middleware('permission:products.show');        
         //Ruta para almacenar los datos luego de ser introducidos en el formulario
-        Route::post('products/create', 'ProductController@store')->name('products.store')
-        ->middleware('permission:products.create'); 
+        Route::post('products/store', 'ProductController@store')->name('products.store')
+                ->middleware('permission:products.create'); 
         //Ruta para mostrar el formulario de creacion de registro de productos
-        Route::get('products/create', 'ProductController@create')->name('products.create')
-        ->middleware('permission:products.create');
+        Route::get('productsCreate', 'ProductController@create')->name('products.create')
+                ->middleware('permission:products.create');
         //Ruta para actualizar un producto por su id
-        Route::put('products/{role}', 'ProductController@update')->name('products.update')
-        ->middleware('permission:products.edit');        
+        Route::put('products/{product}', 'ProductController@update')->name('products.update')
+                ->middleware('permission:products.edit');        
         //Ruta para editar un producto
-        Route::get('products/{role}/edit', 'ProductController@edit')->name('products.edit')
-        ->middleware('permission:products.edit');
-        Route::delete('products/{role}', 'ProductController@destroy')->name('products.destroy')
-        ->middleware('permission:products.destroy');
+        Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit')
+                ->middleware('permission:products.edit');
+        Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy')
+                ->middleware('permission:products.destroy');
         
+
+     
+                
          //Ruta para los Usuarios      
         // Ruta para listar todos los usuarios
-        Route::get('users', 'UsetController@index')->name('users.index')
-        ->middleware('permission:users.index');
+        Route::get('users', 'UserController@index')->name('users.index')
+                ->middleware('permission:users.index');
         //Ruta para ver los detalles de un usuario
-        Route::get('users/{role}', 'UserController@show')->name('users.show')
-        ->middleware('permission:users.show');        
+        Route::get('users/{user}', 'UserController@show')->name('users.show')
+                ->middleware('permission:users.show');        
         //Ruta para actualizar un usuario por su id
-        Route::put('users/{role}', 'UserController@update')->name('users.update')
-        ->middleware('permission:users.edit');        
+        Route::put('users/{user}', 'UserController@update')->name('users.update')
+		->middleware('permission:users.edit');        
         //Ruta para editar un usuario
-        Route::get('users/{role}/edit', 'UserController@edit')->name('users.edit')
-        ->middleware('permission:users.edit');
-        Route::delete('users/{role}', 'UserController@destroy')->name('users.destroy')
-        ->middleware('permission:users.destroy'); 
+        Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')
+                ->middleware('permission:users.edit');
+        Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')
+                ->middleware('permission:users.destroy'); 
     });
